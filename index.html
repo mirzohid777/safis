@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <title>Document</title>
+    <link rel="stylesheet" href="mean.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="./index.html">
+                <div class="logo">
+                    <img src="./img/Screenshot_2025-11-08_160401-removebg-preview.png" alt="">
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="./index.html">🏠 Bosh sahifa</a>
+                <a href="./about.html">📊 Haqida</a>
+                <a href="#products">🛒 Mahsulotlar</a>
+                <a href="#contact">📞 Aloqa</a>
+                <div class="language-selector">
+                    <button class="language-btn" onclick="toggleLanguageDropdown()">
+                        <img src="https://flagcdn.com/w40/uz.png" alt="O'zbekcha">
+                        <span id="selectedLang">O'zbekcha</span>
+                    </button>
+
+                    <div class="language-dropdown" id="languageDropdown">
+                        <div class="language-option selected" onclick="selectLanguage('uz', `O'zbekcha`, this)">
+                            <img src="https://flagcdn.com/w40/uz.png" alt="O'zbekcha">
+                            <span>O'zbekcha</span>
+                        </div>
+
+                        <div class="language-option" onclick="selectLanguage('ru', 'Русский', this)">
+                            <img src="https://flagcdn.com/w40/ru.png" alt="Русский">
+                            <span>Русский</span>
+                        </div>
+
+                        <div class="language-option" onclick="selectLanguage('en', 'English', this)">
+                            <img src="https://flagcdn.com/w40/gb.png" alt="English">
+                            <span>English</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <button class="menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileMenu()"></div>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="menu-header">
+            <div class="menu-logo">
+                <img width="50%" src="./img/Screenshot_2025-11-08_160401-removebg-preview.png" alt="SAFIS Logo">
+            </div>
+            <button class="close-btn" onclick="toggleMobileMenu()">✖</button>
+        </div>
+
+        <a href="./index.html" onclick="toggleMobileMenu()">🏠 Bosh sahifa</a>
+        <a href="./about.html" onclick="toggleMobileMenu()">📊 Haqida</a>
+        <a href="#products" onclick="toggleMobileMenu()">🛒 Mahsulotlar</a>
+        <a href="#contact" onclick="toggleMobileMenu()">📞 Aloqa</a>
+        <div class="language-selector-mobile">
+            <div class="lang-title">Til tanlash</div>
+            <div class="language-tabs">
+                <button class="lang-tab active" onclick="selectLanguage(this, 'O\'zb')" data-lang="uzb">
+                    O'zb
+                </button>
+                <button class="lang-tab" onclick="selectLanguage(this, 'Рус')" data-lang="rus">
+                    Рус
+                </button>
+                <button class="lang-tab" onclick="selectLanguage(this, 'Eng')" data-lang="eng">
+                    Eng
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+
+    <section class="hero" id="home">
+        <div class="hero-text">
+            <h1>Toza Suv - <span>Sog'lom Hayot</span></h1>
+            <p>Safis - bu sizning salomatligingiz uchun eng toza va sifatli tabiiy suv. Har bir tomchi tabiatning
+                bepoyon nayranglarini o'zida mujassamlashtiradi.</p>
+            <button class="cta-button" onclick="openOrderModal()">Buyurtma berish</button>
+        </div>
+
+
+        <div class="modal-overlay" id="orderModal" onclick="closeModalOnOverlay(event)">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <div class="modal-title-section">
+                        <h2>Yetkazib berish usulini tanlang</h2>
+                        <p class="modal-subtitle">Sizga qulay bo'lgan usulni tanlang</p>
+                    </div>
+                    <button class="close-modal-btn" onclick="closeOrderModal()">×</button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-section">
+                        <!-- Tabs -->
+                        <div class="delivery-tabs">
+                            <button class="tab-btn active" onclick="switchTab('delivery')">Yetkazib berish</button>
+                            <button class="tab-btn" onclick="switchTab('pickup')">Olib ketish</button>
+                        </div>
+
+                        <div id="deliveryTab" class="tab-content active">
+                            <form id="deliveryForm">
+                                <div class="form-group">
+                                    <label>Ism</label>
+                                    <input type="text" class="form-input" placeholder="Ismingizni kiriting" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Familiya</label>
+                                    <input type="text" class="form-input" placeholder="Familiyangizni kiriting"
+                                        required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Telefon raqam</label>
+                                    <input type="tel" class="form-input" placeholder="+998 XX XXX XX XX" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Yetkazib berish manzili</label>
+                                    <input type="text" class="form-input" placeholder="Ko'cha, uy raqami, xonadon"
+                                        required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Izoh </label>
+                                    <textarea class="form-input" rows="3"
+                                        placeholder="Qo'shimcha ma'lumot..."></textarea>
+                                </div>
+
+                                <button type="submit" class="submit-button">Tasdiqlash</button>
+                            </form>
+                        </div>
+
+                        <div id="pickupTab" class="tab-content">
+    
+
+                            <div class="restaurant-list" id="restaurantList">
+                                <div class="restaurant-item" onclick="selectRestaurant(this)">
+                                    <div class="restaurant-name">📍 Yashnabot</div>
+                                    <div class="restaurant-address">Muxtor Ashrafiy kochasi</div>
+                                </div>
+
+                                <div class="restaurant-item" onclick="selectRestaurant(this)">
+                                    <div class="restaurant-name">📍 Boka</div>
+                                    <div class="restaurant-address"></div>
+                                </div>
+
+                            </div>
+
+                            <button type="button" class="submit-button" id="selectRestaurantBtn"
+                                disabled>Tanlash</button>
+                        </div>
+                    </div>
+
+                    <div class="map-section">
+                        <div class="map-placeholder">
+                            <iframe class="map-iframe"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d191884.86779073386!2d69.1344!3d41.2995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b0cc379e9c3%3A0xa5a9323b4aa5cb98!2sTashkent%2C%20Uzbekistan!5e0!3m2!1sen!2s!4v1234567890123"
+                                allowfullscreen="" loading="lazy">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="hero-image">
+            <img width="350px" src="./img/Screenshot_2025-11-08_160612-removebg-preview.png" alt="">
+        </div>
+    </section>
+
+    <section class="features" id="about">
+        <h2>Nima uchun Safis?</h2>
+        <p class="features-subtitle">Biz sizga eng yaxshi sifatni taqdim etamiz</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">💧</div>
+                <h3>100% Toza Suv</h3>
+                <p>Tabiiy manbalardan olingan, zamonaviy texnologiyalar yordamida tozalangan</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧪</div>
+                <h3>Sertifikatlangan</h3>
+                <p>Barcha xalqaro standartlarga javob beruvchi sifat sertifikatlari</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚚</div>
+                <h3>Tez Yetkazib Berish</h3>
+                <p>24 soat ichida uyingizgacha yetkazib beramiz</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⭐</div>
+                <h3>Yuqori Sifat</h3>
+                <p>Har bir bosqichda sifat nazorati amalga oshiriladi</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="products" id="products">
+        <h2>Bizning Mahsulotlar</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="https://safis.uz/wp-content/uploads/2017/11/Safis-bez-gaza-20L.jpg" alt="">
+                <h3>Safis 0.5L</h3>
+                <p>Qo'l qulayligi uchun ideal hajm</p>
+                <div class="product-price">1,500 so'm</div>
+                <button class="cta-button" onclick="openOrderModal()">Buyurtma berish</button>
+            </div>
+            <div class="product-card">
+                <img src="https://safis.uz/wp-content/uploads/2017/11/Safis-bez-gaza-20L.jpg" alt="">
+                <h3>Safis 1.5L</h3>
+                <p>Kunlik iste'mol uchun optimal</p>
+                <div class="product-price">3,000 so'm</div>
+                <button class="cta-button" onclick="openOrderModal()">Buyurtma berish</button>
+            </div>
+            <div class="product-card">
+                <img src="https://safis.uz/wp-content/uploads/2017/11/Safis-bez-gaza-20L.jpg" alt="">
+                <h3>Safis 19L</h3>
+                <p>Oila va ofis uchun</p>
+                <div class="product-price">18,000 so'm</div>
+                <button class="cta-button" onclick="openOrderModal()">Buyurtma berish</button>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div>
+                <img width="130px" src="./img/Screenshot_2025-11-08_160401-removebg-preview.png" alt="">
+            </div>
+            <div class="social-links">
+                <div class="social-links">
+                    <a target="_blank" href="https://www.instagram.com/safiswater.uz/" title="Instagram">
+                        <img width="35" src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+                    </a>
+                    <a target="_blank" href="https://www.facebook.com/safiswater/" title="Facebook">
+                        <img width="35" src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+                    </a>
+                    <a target="_blank" href="https://t.me/s/safisuz?before=101" title="Telegram">
+                        <img width="35" src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram">
+                    </a>
+                    <a href="#" title="Phone">
+                        <img width="35" src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Phone">
+                    </a>
+                </div>
+
+            </div>
+            <div>
+                <p>© 2025 Safis. Toza suv - sog'lom hayot</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="./mean.js"></script>
+    <script>
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById("languageDropdown");
+            dropdown.classList.toggle("active");
+        }
+
+        function selectLanguage(langCode, langName, element) {
+            const selectedLang = document.getElementById("selectedLang");
+            const dropdown = document.getElementById("languageDropdown");
+            const allOptions = document.querySelectorAll(".language-option");
+
+            allOptions.forEach((opt) => opt.classList.remove("selected"));
+
+            element.classList.add("selected");
+
+            selectedLang.textContent = langName;
+
+            const flagImg = document.querySelector(".language-btn img");
+
+            if (langCode === "uz") {
+                flagImg.src = "https://flagcdn.com/w40/uz.png";
+            } else if (langCode === "ru") {
+                flagImg.src = "https://flagcdn.com/w40/ru.png";
+            } else if (langCode === "en") {
+                flagImg.src = "https://flagcdn.com/w40/gb.png";
+            }
+
+            dropdown.classList.remove("active");
+        }
+
+        window.addEventListener("click", function (e) {
+            const dropdown = document.getElementById("languageDropdown");
+            const button = document.querySelector(".language-btn");
+            if (!button.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.remove("active");
+            }
+        });
+
+        function selectLanguage(button, lang) {
+            const tabs = document.querySelectorAll('.lang-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            button.classList.add('active');
+
+            document.getElementById('selectedLanguage').textContent = lang;
+        }
+
+    </script>
+</body>
+
+</html>
